@@ -35,11 +35,23 @@ for _, student in students_df.iterrows():
     if not attendance_record.empty:
         status = attendance_record['status'].values[0]
         if status == 'Present':
-            message = f"You were present for the class on {today}."
+            message = (f"Dear Student,\n\n"
+                       f"We are pleased to inform you that you were present for the class on {today}.\n"
+                       f"Thank you for your commitment to your studies. Keep up the great work!\n\n"
+                       f"Best regards,\n"
+                       f"Your Attendance Team")
         else:
-            message = f"You were absent for the class on {today}."
+            message = (f"Dear Student,\n\n"
+                       f"This is a reminder that you were absent for the class on {today}.\n"
+                       f"Please make sure to catch up on any missed materials and reach out if you have any questions.\n\n"
+                       f"Best wishes,\n"
+                       f"Your Attendance Team")
     else:
-        message = f"No attendance record found for today ({today})."
+        message = (f"Dear Student,\n\n"
+                   f"We were unable to find an attendance record for you today ({today}).\n"
+                   f"If you believe this is an error, please contact us as soon as possible.\n\n"
+                   f"Thank you,\n"
+                   f"Your Attendance Team")
 
     # Send email using AWS SES
     response = ses_client.send_email(
@@ -61,10 +73,9 @@ for _, student in students_df.iterrows():
     print(f"Sent email to {student_email}: {message}")
 
 # Optionally, save the final attendance status to S3
-final_attendance_file_key = 'path/to/Final_Attendance.xlsx'  # Path to save the final attendance status
+final_attendance_file_key = 'Final_Attendance.xlsx'  # Path to save the final attendance status
 attendance_df.to_excel('Final_Attendance.xlsx', index=False)
 
 # Upload the final attendance status back to S3
 s3_client.upload_file('Final_Attendance.xlsx', BUCKET_NAME, final_attendance_file_key)
 print("Final attendance status saved to S3 at path:", final_attendance_file_key)
-
