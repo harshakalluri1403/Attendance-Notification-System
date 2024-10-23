@@ -36,8 +36,11 @@ This project implements an attendance notification system that reads student att
    - Create an S3 bucket (e.g., food-delivery-app-assets).
    - Upload the following Excel files to the S3 bucket:
        - Students.xlsx: Contains student IDs and their email addresses.
+
    ![](https://github.com/harshakalluri1403/Attendance-Notification-System-Using-AWS/blob/02f902c92cc6ca3038ae7c55d2209db699994e83/b)
+
        - Attendance.xlsx: Contains attendance records with student IDs and dates.
+
    ![](https://github.com/harshakalluri1403/Attendance-Notification-System-Using-AWS/blob/02f902c92cc6ca3038ae7c55d2209db699994e83/c)
 
 ## Usage
